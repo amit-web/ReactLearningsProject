@@ -11,21 +11,18 @@ export class AuthService {
         .setProject(conf.appWriteProjectId);
         this.account = new Account(this.client)
     }
-
-    async createAccount({email,password,name}){
-       try {
-        const userAccount = await this.account.create(ID.unique(),email,password,name);
-        if(userAccount){
-            //call another Method
-            return this.login({email,password})
-
+    async createAccount({email, password, name}) {
+        try {
+            const userAccount = await this.account.create(ID.unique(), email, password, name);
+            if (userAccount) {
+                // call another method
+                return this.login({email, password});
+            } else {
+               return  userAccount;
+            }
+        } catch (error) {
+            throw error() ;
         }
-        else{
-             return userAccount;
-        }
-       } catch (error) {
-            throw error()
-       }
     }
 
     async login ({email,password}){
@@ -37,11 +34,13 @@ export class AuthService {
         }
     }
 
-    async getCurrentUSer(){
+    async getCurrentUser(){
         try {
-            return await this.account.get();
+            const response = await this.account.get();
+            console.log(response)
+            return response
         } catch (error) {
-           console.log("AppWrite service :: getCurrentUser:: error",error);
+           console.log("appwrite service :: getCurrentUser:: error",error);
         }
         return null
     }
@@ -50,7 +49,7 @@ export class AuthService {
         try {
           await  this.account.deleteSessions()
         } catch (error) {
-            console.log("AppWrite service :: logout:: error",error);
+            console.log("appwrite service :: logout:: error",error);
         }
     }
 }

@@ -1,43 +1,38 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import './App.css'
-import {useDispatch} from 'react-redux';
-import authService from "./appWrite/auth"
-import { useEffect } from 'react';
-import {login,logout} from "./store/authSlice"
-import { Outlet } from 'react-router-dom';
-import { Footer, Header } from './components';
-//project k root me .env file hona chahiye jaise , jhan pe package.json hota hai
-//ja v .env file me chnage kerte hai most of the time hume project fir se run krna pdta hai.
+import authService from "./appwrite/auth"
+import {login, logout} from "./store/authSlice"
+import { Footer, Header } from './components'
+import { Outlet } from 'react-router-dom'
+
 function App() {
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
+  // useEffect(() => {
+  //   authService.getCurrentUser()
+  //   .then((userData) => {
+  //     if (userData) {
+  //       dispatch(login({userData}))
+  //     } else {
+  //       dispatch(logout())
+  //     }
+  //   })
+  //   .finally(() => setLoading(false))
+  // }, [])
 
-  useEffect(()=>{
-      authService.getCurrentUSer()
-      .then((userData)=>{
-        if(userData){
-          dispatch(login({userData}))
-        }
-        else{
-          dispatch(logout())
-        }
-      })
-      .finally(()=>{
-        setLoading(false)
-      })
-  },[])
-  return !loading ?(
+  return !loading ? (
     <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
-        <div className='w-full block'>
-           <Header/>
-           <main>
-             {/* <Outlet/> */}
-           </main>
-           <Footer/>
-        </div>
+      <div className='w-full block'>
+        <Header />
+        <main>
+        TODO:  <Outlet />
+        </main>
+        <Footer />
+      </div>
     </div>
-  ):null
+  ) : null
 }
 
 export default App
