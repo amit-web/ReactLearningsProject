@@ -1,0 +1,22 @@
+.crossed-out {
+    text-decoration: line-through;
+}
+.normalText{
+    text-decoration:none;
+}
+.showTodo{
+    height:50px;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    background-color: blue;
+    color: white;
+    margin: 20px 20px 20px 20px;
+}
+.button{
+    height: 20px;
+    width: 150px;
+    color: white;
+    background-color: red;
+    margin: 5px 5px 5px 5px;
+}
