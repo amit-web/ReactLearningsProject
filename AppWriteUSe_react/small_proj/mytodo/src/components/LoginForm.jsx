@@ -13,6 +13,7 @@ const LoginForm = ({ setActiveForm }) => {
     return (
         <div>
             <h1>Login</h1>
+            <h1>Login</h1>
 
             <form ref={formRef} onSubmit={handleLogin}>
                 <div className="auth-field-wrapper">
